@@ -2,14 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>MineSweeper</title>
+    <title>CYOA</title>
     <link type="text/css" rel="stylesheet" href="assets/css/style.css" >
 </head>
-<body onload="init()">
+<body>
 <canvas id="content"></canvas>
 
 <script type="text/javascript" src="js/phaser.min.js"></script>
-<script type="text/javascript" src="js/Minesweeper.js"></script>
+<script type="text/javascript" src="js/CYOA.js"></script>
+
+<script type="text/javascript">
+    var app = new Game();
+    app.start();
+</script>
 
 </body>
 </html>

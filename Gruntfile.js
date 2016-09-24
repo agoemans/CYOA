@@ -21,11 +21,14 @@ module.exports = function(grunt) {
 			},
 			my_target:{
 				files: {
-					'_build/dev/js/Minesweeper.js': [
-						//'node_modules/phaser/build/phaser.min.js',
-						'js/Utils/CellProcessor.js',
-						'js/backend/FieldCreation.js',
-						'js/objects/cell.js',
+					'_build/dev/js/CYOA.js': [
+						'js/backend/backend.js',
+						'js/utils/helper.js',
+						'js/objects/dialog.js',
+						'js/states/gameState.js',
+						'js/states/preloader.js',
+						'js/data/dialogData.js',
+						'js/data/constants.js',
 						'js/app.js'
 					]
 				}
@@ -50,7 +53,7 @@ module.exports = function(grunt) {
 
 		watch:{
 			scripts:{
-				files:['js/**/ *.js'],
+				files:['js/**/*.js'],
 				tasks:['jshint'],
 				options: {
 					spawn: false
@@ -69,13 +72,13 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-connect');
 
 	// Default task(s).
-	grunt.registerTask('build', [
+	grunt.registerTask('default', [
 		'clean',
 		'uglify',
 		'copy:dev',
 		'watch'
 	]);
 
-	grunt.registerTask('serverRun', 'connect:server:keepalive')
+	grunt.registerTask('serverRun', 'connect:server:keepalive');
 
 };

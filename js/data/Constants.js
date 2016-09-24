@@ -1,2 +1,0 @@
-var rowNumber;
-var colNumber;
