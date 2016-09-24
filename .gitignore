@@ -1,0 +1,6 @@
+.idea
+*.map
+vendor
+node_modules
+
+_build
