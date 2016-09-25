@@ -1,8 +1,8 @@
 var NpcCharacter = function (game, x, y, name, frame) {
 	Phaser.Sprite.call(this, game, x, y, name, frame);
 
+	//dialog bubble and text
 	this.npcDialog = '';
-
 	this.diablogBG = game.add.graphics(0, 0);
 	this.diablogBG.beginFill(0xFFFFFF, 1);
 	this.diablogBG.drawRect(200, 100, 150, 120);
@@ -13,6 +13,10 @@ var NpcCharacter = function (game, x, y, name, frame) {
 		font: '25px Arial', fill: '#ff0044', align: 'left'
 	});
 	this.npcDialogBubble.anchor.setTo(0, 0);
+
+	//create temp list of bad dialog for bucket
+	this.tempBadDialog = helper.shuffle(dialog.npc.bad.slice(0));
+
 
 	this.scale.setTo(1, 1);
 	game.add.existing(this);
@@ -28,8 +32,6 @@ NpcCharacter.prototype.setNPCDialog = function () {
 
 	this.diablogBG.visible = true;
 
-	console.log(this.npcDialogBubble);
-
 	this.diablogBG.clear()
 		.beginFill(0xFFFFFF, 1)
 		.drawRect(200, 100, this.npcDialogBubble.width + 10, this.npcDialogBubble.height + 10);
@@ -37,9 +39,24 @@ NpcCharacter.prototype.setNPCDialog = function () {
 	//console.log('update text', this.npcDialogBubble.text);
 };
 
+//todo move this from click to update funct, randomly says
 NpcCharacter.prototype.getDialog = function () {
-	console.log('get dialog');
-	this.npcDialog = backend.getBadDialog();
+	var randomIndex = helper.getRandomNumber(0, this.tempBadDialog.length - 1);
+	this.npcDialog = this.tempBadDialog[randomIndex];
+	//console.log('npcDialog', this.npcDialog);
+	console.log('tempDialog', this.tempBadDialog );
+
+	if (this.tempBadDialog.length > 0){
+		//this.tempBadDialog.pop();
+		this.tempBadDialog.splice(randomIndex, 1);
+	}
+
+	if (this.tempBadDialog.length <= 0){
+		//console.log('get diablog, length of tempbadDialog', this.tempBadDialog.length);
+		this.tempBadDialog = helper.shuffle(dialog.npc.bad.slice(0));
+		console.log('get diablog, update length', this.tempBadDialog.length, this.tempBadDialog);
+	}
+
 	this.setNPCDialog();
 };
 
