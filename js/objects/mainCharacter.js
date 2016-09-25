@@ -11,12 +11,12 @@ MainCharacter.prototype.constructor = MainCharacter;
 
 MainCharacter.prototype.update = function(){
 	if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
-		this.x -= 4;
+		this.body.x -= 4;
 	} else if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
-		this.x += 4;
+		this.body.x += 4;
 	} else if(game.input.keyboard.isDown(Phaser.Keyboard.UP)){
-		this.y -= 4;
+		this.body.y -= 4;
 	} else if(game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){
-		this.y += 4;
+		this.body.y += 4;
 	}
 };
