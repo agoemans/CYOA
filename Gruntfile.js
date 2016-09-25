@@ -25,6 +25,7 @@ module.exports = function(grunt) {
 						'js/backend/backend.js',
 						'js/utils/helper.js',
 						'js/objects/dialog.js',
+						'js/objects/npcCharacter.js',
 						'js/states/gameState.js',
 						'js/states/preloader.js',
 						'js/data/dialogData.js',
