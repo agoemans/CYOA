@@ -1,5 +1,5 @@
 var Game = function () {
-	game = new Phaser.Game(800, 600, Phaser.AUTO, '');
+	game = new Phaser.Game(GameWidth, GameHeight, Phaser.CANVAS, '');
 };
 
 Game.prototype = {

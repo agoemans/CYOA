@@ -1,6 +1,8 @@
 var GameState = function (game) {
 	this.npcDialog = '';
 	this.npcDialogBubble = null;
+	this.map = null;
+	this.groundLayer = null;
 };
 
 GameState.prototype = {
@@ -10,19 +12,17 @@ GameState.prototype = {
 
 		game.input.onDown.add(this.getDialog, this);
 
+		this.createGround();
+
 		this.npcDialogBubble = game.add.text(500, 100, this.npcDialog, {
 			font: '35px Arial', fill:'#ff0044', align: 'left'});
 		this.npcDialogBubble.anchor.setTo(0.5, 0.5);
 
-		var floor = game.add.sprite(100, 100, 'floorBase');
-		floor.scale.set(2.5);
+		var player = game.add.sprite(30, 30, 'player');
+		player.scale.set(1);
 
-
-		var player = game.add.sprite(100, 100, 'player');
-		player.scale.set(2);
-
-		var player2 = game.add.sprite(150, 100, 'player', 10);
-		player2.scale.set(2);
+		var player2 = game.add.sprite(60, 30, 'player', 10);
+		player2.scale.set(1);
 	},
 
 	getDialog: function (){
@@ -36,5 +36,15 @@ GameState.prototype = {
 		console.log('setNPCDialog', this.npcDialog);
 		this.npcDialogBubble.setText(this.npcDialog);
 		console.log('update text', this.npcDialogBubble.text);
+	},
+
+	createGround: function(){
+		this.map = game.add.tilemap('map');
+		this.map.addTilesetImage('Floor', 'Tile');
+		this.map.addTilesetImage('Floor2', 'Floor');
+		this.groundLayer = this.map.createLayer('dungeonFloor');
+		this.groundLayer.resizeWorld();
+		//game.add.existing(this.groundLayer);
 	}
+
 };
