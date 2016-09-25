@@ -4,6 +4,7 @@ var GameState = function (game) {
 	this.map = null;
 	this.groundLayer = null;
 	this.npcPlayer = null;
+	this.mainPlayer = null;
 };
 
 GameState.prototype = {
@@ -14,21 +15,43 @@ GameState.prototype = {
 		this.createGround();
 
 		//todo move to own class, same as NPC
-		var player = game.add.sprite(30, 30, 'player');
-		player.scale.set(1);
+		this.mainPlayer = new MainCharacter(game, 30, 30, 'player', 0);
+		this.physics.arcade.enable(this.mainPlayer, Phaser.Physics.ARCADE);
+		this.mainPlayer.body.collideWorldBounds = true;
+		this.mainPlayer.body.checkCollision.up = true;
+		this.mainPlayer.body.checkCollision.down = true;
+		this.mainPlayer.body.checkCollision.left = true;
+		this.mainPlayer.body.checkCollision.right = true;
 
-		this.npcPlayer = new NpcCharacter(game, 60, 30, 'player', 10);
+		this.npcPlayer = new Character(game, 60, 30, 'player', 10);
+		this.npcPlayer.setupDialog(game);
+		this.physics.arcade.enable(this.npcPlayer, Phaser.Physics.ARCADE);
+		this.npcPlayer.body.collideWorldBounds = true;
+		this.npcPlayer.body.checkCollision.up = true;
+		this.npcPlayer.body.checkCollision.down = true;
+		this.npcPlayer.body.checkCollision.left = true;
+		this.npcPlayer.body.checkCollision.right = true;
 
 		game.input.onDown.add(this.npcPlayer.getDialog, this.npcPlayer);
+
 	},
 
 	createGround: function(){
 		this.map = game.add.tilemap('map');
+
 		this.map.addTilesetImage('Floor', 'Tile');
 		this.map.addTilesetImage('Floor2', 'Floor');
+
 		this.groundLayer = this.map.createLayer('dungeonFloor');
 		this.groundLayer.resizeWorld();
+
+		this.map.setCollision(19, true, this.groundLayer);
 		//game.add.existing(this.groundLayer);
+	},
+
+	update: function () {
+		game.physics.arcade.collide(this.mainPlayer, this.groundLayer);
+		game.physics.arcade.collide(this.mainPlayer, this.npcPlayer);
 	}
 
 };
