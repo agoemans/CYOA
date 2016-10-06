@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 			server:{
 				options:{
 					port: 8080,
-					base:['_build/dev']
+					base:['_build/dev', 'node_modules']
 				}
 			}
 		},
@@ -56,7 +56,7 @@ module.exports = function(grunt) {
 		watch:{
 			scripts:{
 				files:['js/**/*.js'],
-				tasks:['jshint'],
+				tasks:['default'],
 				options: {
 					spawn: false
 				}

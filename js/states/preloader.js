@@ -17,6 +17,7 @@ Preload.prototype = {
 	preload: function (){
 		console.log('starting preloader');
 		game.load.tilemap('map', 'assets/atlas/map.json', null, Phaser.Tilemap.TILED_JSON);
+		game.load.tilemap('map2', 'assets/atlas/map2.json', null, Phaser.Tilemap.TILED_JSON);
 		game.load.spritesheet('door', 'assets/atlas/Door0.png');
 		game.load.spritesheet('Floor', 'assets/atlas/Floor.png', 16, 16);
 		game.load.spritesheet('floorBase', 'assets/atlas/FloorBase.png', 48, 48);
