@@ -5,6 +5,7 @@ var helper = (function () {
 		},
 
 		shuffle: function (array) {
+			//todo inefficient, need to change this!
 			var oldArray = array;
 			var tempArray = [];
 			while(oldArray.length > 0){

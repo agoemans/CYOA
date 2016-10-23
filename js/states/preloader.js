@@ -9,7 +9,6 @@ Preload.prototype = {
 		this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 		this.game.scale.pageAlignHorizontally = true;
 		this.game.scale.pageAlignVertcally = true;
-		//this.game.scale.set(1,1);
 		this.game.scale.refresh();
 
 	},

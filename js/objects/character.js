@@ -35,7 +35,6 @@ Character.prototype.setupDialog = function(game) {
 };
 
 Character.prototype.setNPCDialog = function () {
-	//console.log('setNPCDialog', this.npcDialog);
 	this.npcDialogBubble.setText(this.npcDialog);
 
 	this.diablogBG.visible = true;
@@ -46,20 +45,17 @@ Character.prototype.setNPCDialog = function () {
 };
 
 Character.prototype.getDialog = function () {
+	//todo refactor this once the dialog data is final
+	//move more of this to backend
 	var randomIndex = helper.getRandomNumber(0, this.tempBadDialog.length - 1);
 	this.npcDialog = this.tempBadDialog[randomIndex];
-	//console.log('npcDialog', this.npcDialog);
-	console.log('tempDialog', this.tempBadDialog);
 
 	if (this.tempBadDialog.length > 0) {
-		//this.tempBadDialog.pop();
 		this.tempBadDialog.splice(randomIndex, 1);
 	}
 
 	if (this.tempBadDialog.length <= 0) {
-		//console.log('get diablog, length of tempbadDialog', this.tempBadDialog.length);
 		this.tempBadDialog = helper.shuffle(dialog.npc.bad.slice(0));
-		console.log('get diablog, update length', this.tempBadDialog.length, this.tempBadDialog);
 	}
 
 	this.setNPCDialog();
@@ -67,12 +63,13 @@ Character.prototype.getDialog = function () {
 
 
 Character.prototype.moveLeft = function () {
-	this.body.velocity.x = -150;
+	//todo change this when move to NPC class
+	this.body.velocity.x = -BaseCharacterVelocity;
 };
 
 Character.prototype.moveRight = function () {
 	this.scale.setTo(-1, -1);
-	this.body.velocity.x = 150;
+	this.body.velocity.x = BaseCharacterVelocity;
 
 };
 
